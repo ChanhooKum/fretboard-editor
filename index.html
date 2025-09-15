@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fretboard Editor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Fretboard Editor</h1>
+    <div class="controls">
+        <div class="control-group">
+            <label for="start-fret">Start Fret:</label>
+            <input type="number" id="start-fret" value="0" min="0" max="24">
+            <label for="end-fret">End Fret:</label>
+            <input type="number" id="end-fret" value="12" min="0" max="24">
+        </div>
+        <div class="control-group">
+            <label>Tuning:</label>
+            <input type="text" class="tuning-input" value="E">
+            <input type="text" class="tuning-input" value="A">
+            <input type="text" class="tuning-input" value="D">
+            <input type="text" class="tuning-input" value="G">
+            <input type="text" class="tuning-input" value="B">
+            <input type="text" class="tuning-input" value="E">
+        </div>
+        <div class="control-group">
+            <label for="root-note-select">Root Note:</label>
+            <select id="root-note-select">
+                <option value="-1">Off</option>
+                <option value="0">C</option>
+                <option value="1">C#/Db</option>
+                <option value="2">D</option>
+                <option value="3">D#/Eb</option>
+                <option value="4">E</option>
+                <option value="5">F</option>
+                <option value="6">F#/Gb</option>
+                <option value="7">G</option>
+                <option value="8">G#/Ab</option>
+                <option value="9">A</option>
+                <option value="10">A#/Bb</option>
+                <option value="11">B</option>
+            </select>
+            <label for="notation-select">Notation:</label>
+            <select id="notation-select">
+                <option value="absolute">Absolute</option>
+                <option value="relative">Relative</option>
+            </select>
+        </div>
+    </div>
+    <div id="fretboard-container">
+        <!-- Fretboard will be generated here -->
+    </div>
+    <div class="input-container">
+        <label for="positions-input">Positions (string,fret):</label>
+        <textarea id="positions-input" rows="5" cols="30" placeholder="e.g., 6,0
+5,2
+4,2"></textarea>
+        <button id="update-button">Update</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

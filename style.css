@@ -1,0 +1,126 @@
+body {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+h1 {
+    color: #1a1a1a;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.control-group label {
+    font-weight: bold;
+}
+
+.tuning-input {
+    width: 30px;
+    text-align: center;
+}
+
+#fretboard-container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.fretboard {
+    display: flex;
+    flex-direction: column;
+}
+
+.fret-numbers {
+    display: flex;
+    margin-left: 30px; /* To align with frets */
+}
+
+.fret-number {
+    width: 60px;
+    text-align: center;
+    color: #888;
+}
+
+.string {
+    display: flex;
+    align-items: center;
+}
+
+.fret {
+    width: 60px;
+    height: 40px;
+    border-left: 2px solid #ccc;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.string:first-child .fret {
+    border-top: none;
+}
+
+.string:last-child .fret {
+    border-bottom: none;
+}
+
+.fret:first-child {
+    border-left: 5px solid #aaa; /* Nut */
+}
+
+.dot {
+    width: 30px;
+    height: 30px;
+    background-color: red;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    position: absolute;
+}
+
+.input-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+#update-button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#update-button:hover {
+    background-color: #0056b3;
+}
