@@ -21,38 +21,88 @@ const fretboardContainer = document.getElementById('fretboard-container');
 function generateFretboard() {
     const startFret = parseInt(startFretInput.value);
     const endFret = parseInt(endFretInput.value);
-    const numFrets = endFret - startFret + 1;
     const numStrings = tuningInputs.length;
+    const inlayFrets = [3, 5, 7, 9, 12, 15, 17, 19, 21, 24];
 
-    fretboardContainer.innerHTML = ''; // Clear existing fretboard
+    fretboardContainer.innerHTML = '';
 
     const fretboard = document.createElement('div');
     fretboard.classList.add('fretboard');
-
-    // Create header row for fret numbers
-    const header = document.createElement('div');
-    header.classList.add('fret-numbers');
-    for (let fret = startFret; fret <= endFret; fret++) {
-        const fretNumber = document.createElement('div');
-        fretNumber.classList.add('fret-number');
-        fretNumber.textContent = fret;
-        header.appendChild(fretNumber);
-    }
-    fretboard.appendChild(header);
+    fretboard.style.width = `${(endFret - startFret + 1) * 60}px`;
 
     // Create strings
     for (let i = 0; i < numStrings; i++) {
         const string = document.createElement('div');
         string.classList.add('string');
-        for (let fret = startFret; fret <= endFret; fret++) {
-            const fretDiv = document.createElement('div');
-            fretDiv.classList.add('fret');
-            fretDiv.dataset.string = i + 1;
-            fretDiv.dataset.fret = fret;
-            string.appendChild(fretDiv);
-        }
+        string.style.top = `${(i * 40) + 20}px`;
         fretboard.appendChild(string);
     }
+
+    // Create frets (vertical lines)
+    for (let i = startFret; i <= endFret; i++) {
+        if (i === 0) continue;
+        const fret = document.createElement('div');
+        fret.classList.add('fret');
+        fret.style.left = `${(i - startFret) * 60}px`;
+        fretboard.appendChild(fret);
+    }
+    
+    // Nut
+    if (startFret === 0) {
+        const nut = document.createElement('div');
+        nut.classList.add('nut');
+        fretboard.appendChild(nut);
+    }
+
+    // Create note positions for dots
+    for (let s = 0; s < numStrings; s++) {
+        for (let f = startFret; f <= endFret; f++) {
+            const notePosition = document.createElement('div');
+            notePosition.classList.add('note-position');
+            notePosition.dataset.string = s + 1;
+            notePosition.dataset.fret = f;
+            notePosition.style.top = `${(s * 40) + 20}px`;
+            notePosition.style.left = `${((f - startFret) * 60) + 30}px`;
+            fretboard.appendChild(notePosition);
+        }
+    }
+
+    // Create fret numbers
+    const fretNumbers = document.createElement('div');
+    fretNumbers.classList.add('fret-numbers');
+    for (let i = startFret; i <= endFret; i++) {
+        if (i === 0) continue;
+        const fretNumber = document.createElement('div');
+        fretNumber.classList.add('fret-number');
+        fretNumber.textContent = i;
+        fretNumber.style.left = `${((i - startFret) * 60) - 30}px`;
+        fretNumbers.appendChild(fretNumber);
+    }
+    fretboard.appendChild(fretNumbers);
+
+    // Create inlay markers
+    const inlays = document.createElement('div');
+    inlays.classList.add('inlays');
+    for (let i = startFret; i <= endFret; i++) {
+        if (inlayFrets.includes(i)) {
+            const inlay = document.createElement('div');
+            inlay.classList.add('inlay');
+            inlay.style.left = `${((i - startFret) * 60) - 30}px`;
+
+            if (i % 12 === 0) { // Double dot for 12, 24, etc.
+                const inlay2 = document.createElement('div');
+                inlay2.classList.add('inlay');
+                inlay2.style.left = inlay.style.left;
+                inlay2.style.top = `${(1 * 40) + 20}px`;
+                inlays.appendChild(inlay2);
+                inlay.style.top = `${(4 * 40) + 20}px`;
+            } else {
+                inlay.style.top = `${(2 * 40) + 20}px`;
+            }
+            inlays.appendChild(inlay);
+        }
+    }
+    fretboard.appendChild(inlays);
 
     fretboardContainer.appendChild(fretboard);
 }
@@ -63,7 +113,7 @@ function updateDisplay() {
     const positions = parsePositions();
     positions.forEach(pos => {
         const note = calculateNote(pos.string, pos.fret);
-        const noteDiv = fretboardContainer.querySelector(`.fret[data-string='${pos.string}'][data-fret='${pos.fret}']`);
+        const noteDiv = fretboardContainer.querySelector(`.note-position[data-string='${pos.string}'][data-fret='${pos.fret}']`);
         if (noteDiv) {
             const dot = document.createElement('div');
             dot.classList.add('dot');

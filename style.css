@@ -43,52 +43,50 @@ h1 {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow-x: auto;
 }
 
 .fretboard {
-    display: flex;
-    flex-direction: column;
-}
-
-.fret-numbers {
-    display: flex;
-    margin-left: 30px; /* To align with frets */
-}
-
-.fret-number {
-    width: 60px;
-    text-align: center;
-    color: #888;
+    position: relative;
+    height: 280px; /* 6 strings * 40px + 40px for numbers */
 }
 
 .string {
-    display: flex;
-    align-items: center;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #aaa;
+    z-index: 1;
 }
 
 .fret {
-    width: 60px;
-    height: 40px;
-    border-left: 2px solid #ccc;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    box-sizing: border-box;
-    position: relative;
+    position: absolute;
+    width: 2px;
+    height: 240px; /* 6 strings * 40px */
+    background-color: #ccc;
+    z-index: 2;
+    top: 20px;
+}
+
+.nut {
+    position: absolute;
+    width: 10px;
+    height: 242px;
+    background-color: #f0f0f0;
+    z-index: 0;
+    top: 19px;
+    left: -5px;
+}
+
+.note-position {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    transform: translate(-50%, -50%);
+    z-index: 3;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.string:first-child .fret {
-    border-top: none;
-}
-
-.string:last-child .fret {
-    border-bottom: none;
-}
-
-.fret:first-child {
-    border-left: 5px solid #aaa; /* Nut */
 }
 
 .dot {
@@ -101,7 +99,35 @@ h1 {
     justify-content: center;
     align-items: center;
     font-weight: bold;
+}
+
+.fret-numbers {
     position: absolute;
+    top: 260px;
+    width: 100%;
+    height: 20px;
+}
+
+.fret-number {
+    position: absolute;
+    transform: translateX(-50%);
+    color: #888;
+}
+
+.inlays {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.inlay {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #ddd;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .input-container {
