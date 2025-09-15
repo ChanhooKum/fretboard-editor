@@ -62,20 +62,20 @@ h1 {
 .fret {
     position: absolute;
     width: 2px;
-    height: 240px; /* 6 strings * 40px */
+    height: 220px;
     background-color: #ccc;
     z-index: 2;
-    top: 20px;
+    top: 10px;
 }
 
 .nut {
     position: absolute;
-    width: 10px;
-    height: 242px;
-    background-color: #f0f0f0;
-    z-index: 0;
-    top: 19px;
-    left: -5px;
+    width: 5px;
+    height: 220px;
+    background-color: #ddd;
+    z-index: 2;
+    top: 10px;
+    left: 0px;
 }
 
 .note-position {
@@ -128,6 +128,22 @@ h1 {
     background-color: #ddd;
     border-radius: 50%;
     transform: translate(-50%, -50%);
+}
+
+.fretboard-border {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: #888;
+    z-index: 1;
+}
+
+.fretboard-border.top {
+    top: 10px;
+}
+
+.fretboard-border.bottom {
+    top: 230px;
 }
 
 .input-container {

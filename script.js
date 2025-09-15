@@ -30,6 +30,14 @@ function generateFretboard() {
     fretboard.classList.add('fretboard');
     fretboard.style.width = `${(endFret - startFret + 1) * 60}px`;
 
+    const topBorder = document.createElement('div');
+    topBorder.classList.add('fretboard-border', 'top');
+    fretboard.appendChild(topBorder);
+
+    const bottomBorder = document.createElement('div');
+    bottomBorder.classList.add('fretboard-border', 'bottom');
+    fretboard.appendChild(bottomBorder);
+
     // Create strings
     for (let i = 0; i < numStrings; i++) {
         const string = document.createElement('div');
@@ -62,7 +70,7 @@ function generateFretboard() {
             notePosition.dataset.string = s + 1;
             notePosition.dataset.fret = f;
             notePosition.style.top = `${(s * 40) + 20}px`;
-            notePosition.style.left = `${((f - startFret) * 60) + 30}px`;
+            notePosition.style.left = `${((f - startFret) * 60) + (f === 0 ? 0 : 30)}px`;
             fretboard.appendChild(notePosition);
         }
     }
@@ -71,11 +79,10 @@ function generateFretboard() {
     const fretNumbers = document.createElement('div');
     fretNumbers.classList.add('fret-numbers');
     for (let i = startFret; i <= endFret; i++) {
-        if (i === 0) continue;
         const fretNumber = document.createElement('div');
         fretNumber.classList.add('fret-number');
         fretNumber.textContent = i;
-        fretNumber.style.left = `${((i - startFret) * 60) - 30}px`;
+        fretNumber.style.left = `${((i - startFret) * 60) + (i === 0 ? 0 : -30)}px`;
         fretNumbers.appendChild(fretNumber);
     }
     fretboard.appendChild(fretNumbers);
@@ -89,15 +96,15 @@ function generateFretboard() {
             inlay.classList.add('inlay');
             inlay.style.left = `${((i - startFret) * 60) - 30}px`;
 
-            if (i % 12 === 0) { // Double dot for 12, 24, etc.
+            if (i % 12 === 0 && i !== 0) { // Double dot for 12, 24, etc.
                 const inlay2 = document.createElement('div');
                 inlay2.classList.add('inlay');
                 inlay2.style.left = inlay.style.left;
-                inlay2.style.top = `${(1 * 40) + 20}px`;
+                inlay2.style.top = `${(1 * 40) + 40}px`;
                 inlays.appendChild(inlay2);
-                inlay.style.top = `${(4 * 40) + 20}px`;
+                inlay.style.top = `${(3 * 40) + 40}px`;
             } else {
-                inlay.style.top = `${(2 * 40) + 20}px`;
+                inlay.style.top = '120px';
             }
             inlays.appendChild(inlay);
         }
