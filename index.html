@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fretboard Editor</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css">
 </head>
 <body>
     <h1>Fretboard Editor</h1>
@@ -17,12 +18,24 @@
         </div>
         <div class="control-group">
             <label>Tuning:</label>
-            <input type="text" class="tuning-input" value="E">
-            <input type="text" class="tuning-input" value="A">
-            <input type="text" class="tuning-input" value="D">
-            <input type="text" class="tuning-input" value="G">
-            <input type="text" class="tuning-input" value="B">
-            <input type="text" class="tuning-input" value="E">
+            <select class="tuning-input">
+                <option value="4" selected>E</option> <option value="0">C</option> <option value="1">C#/Db</option> <option value="2">D</option> <option value="3">D#/Eb</option> <option value="5">F</option> <option value="6">F#/Gb</option> <option value="7">G</option> <option value="8">G#/Ab</option> <option value="9">A</option> <option value="10">A#/Bb</option> <option value="11">B</option>
+            </select>
+            <select class="tuning-input">
+                <option value="9" selected>A</option> <option value="0">C</option> <option value="1">C#/Db</option> <option value="2">D</option> <option value="3">D#/Eb</option> <option value="4">E</option> <option value="5">F</option> <option value="6">F#/Gb</option> <option value="7">G</option> <option value="8">G#/Ab</option> <option value="10">A#/Bb</option> <option value="11">B</option>
+            </select>
+            <select class="tuning-input">
+                <option value="2" selected>D</option> <option value="0">C</option> <option value="1">C#/Db</option> <option value="3">D#/Eb</option> <option value="4">E</option> <option value="5">F</option> <option value="6">F#/Gb</option> <option value="7">G</option> <option value="8">G#/Ab</option> <option value="9">A</option> <option value="10">A#/Bb</option> <option value="11">B</option>
+            </select>
+            <select class="tuning-input">
+                <option value="7" selected>G</option> <option value="0">C</option> <option value="1">C#/Db</option> <option value="2">D</option> <option value="3">D#/Eb</option> <option value="4">E</option> <option value="5">F</option> <option value="6">F#/Gb</option> <option value="8">G#/Ab</option> <option value="9">A</option> <option value="10">A#/Bb</option> <option value="11">B</option>
+            </select>
+            <select class="tuning-input">
+                <option value="11" selected>B</option> <option value="0">C</option> <option value="1">C#/Db</option> <option value="2">D</option> <option value="3">D#/Eb</option> <option value="4">E</option> <option value="5">F</option> <option value="6">F#/Gb</option> <option value="7">G</option> <option value="8">G#/Ab</option> <option value="9">A</option> <option value="10">A#/Bb</option>
+            </select>
+            <select class="tuning-input">
+                <option value="4" selected>E</option> <option value="0">C</option> <option value="1">C#/Db</option> <option value="2">D</option> <option value="3">D#/Eb</option> <option value="5">F</option> <option value="6">F#/Gb</option> <option value="7">G</option> <option value="8">G#/Ab</option> <option value="9">A</option> <option value="10">A#/Bb</option> <option value="11">B</option>
+            </select>
         </div>
         <div class="control-group">
             <label for="root-note-select">Root Note:</label>
@@ -41,23 +54,34 @@
                 <option value="10">A#/Bb</option>
                 <option value="11">B</option>
             </select>
-            <label for="notation-select">Notation:</label>
-            <select id="notation-select">
-                <option value="absolute">Absolute</option>
-                <option value="relative">Relative</option>
-            </select>
+        </div>
+        <div id="interval-notation-controls" class="control-group" style="display: none;">
+            <label>Intervals:</label>
+            <select class="interval-select" data-interval="1"><option>b2</option><option>b9</option></select>
+            <select class="interval-select" data-interval="2"><option>2</option><option>9</option></select>
+            <select class="interval-select" data-interval="3"><option>b3</option><option>#9</option></select>
+            <select class="interval-select" data-interval="5"><option>4</option><option>11</option></select>
+            <select class="interval-select" data-interval="6"><option>#4</option><option>b5</option><option>#11</option></select>
+            <select class="interval-select" data-interval="8"><option>b6</option><option>#5</option><option>b13</option></select>
+            <select class="interval-select" data-interval="9"><option>6</option><option>13</option></select>
         </div>
     </div>
     <div id="fretboard-container">
         <!-- Fretboard will be generated here -->
     </div>
+    <div class="comment-container">
+        <label for="comment-input">Comments (Markdown supported):</label>
+        <textarea id="comment-input" rows="10" cols="80"></textarea>
+        <div id="comment-preview" class="markdown-body"></div>
+    </div>
     <div class="input-container">
         <label for="positions-input">Positions (string,fret):</label>
         <textarea id="positions-input" rows="5" cols="30" placeholder="e.g., 6,0
-5,2
+5,2,blue
 4,2"></textarea>
         <button id="update-button">Update</button>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
